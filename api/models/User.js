@@ -18,6 +18,10 @@ const userSchema = new Schema({
   role: {
     type: Schema.Types.ObjectId,
     ref: 'Role'
+  },
+  tickets: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Ticket'
   }
 })
 
