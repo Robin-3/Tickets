@@ -1,0 +1,97 @@
+Table Permissions {
+  _id ObjectId
+  type String
+  description String
+  enable Boolean
+}
+
+Table Proyects {
+  _id ObjectId
+  name String
+  description String
+  tickets [ObjectId] [ref: > Tickets._id]
+}
+
+Table Tickets {
+  _id ObjectId
+  created_at Date
+  title String
+  description String
+  what_happend [String]
+  Wwat_should_happen [String]
+  steps_of_how_it_happened [String]
+  is_billable Boolean
+  files [Files] // Schema
+  due_date Date
+  comments [Comments] // Schema
+  assigned [Assigneds] // Schema
+  proyect ObjectId [ref: > Proyects._id]
+  status ObjectId [ref: > Status._id]
+  categories ObjectId [ref: > Categories._id]
+  priority ObjectId [ref: > Priorities._id]
+}
+
+Table Assigneds { // Schema
+  _id ObjectId
+  time [Hours] // Schema
+  user ObjectId [ref: > Users._id]
+}
+
+Table Hours { // Schema
+  _id ObjectId
+  start Date
+  end Date
+}
+
+Table Files { // Schema
+  _id ObjectId
+  data Buffer
+  content_type String
+  // 16MB
+}
+
+Table Comments { // Schema
+  _id ObjectId
+  comment String
+  date Date
+  user ObjectId [ref: > Users._id]
+}
+
+Table Users {
+  _id ObjectId
+  name String
+  password String
+  e_mail [String]
+  cel [Number]
+  rol Rols // Schema
+  proyects_can_solve [ObjectId] [ref: > Proyects._id]
+  proyects_as_client [ObjectId] [ref: > Proyects._id]
+}
+
+Table Rols { // Schema
+  _id ObjectId
+  name String
+  description String
+  permissions [ObjectId] [ref: > Permissions._id]
+}
+
+Table Status {
+  _id ObjectId
+  state String
+  description String
+  // new, waiting reply, replied, in progress, on hold, custom status, needs review, shipped, resolved
+}
+
+Table Priorities {
+  _id ObjectId
+  state String
+  description String
+  // Critical, high, medium, low
+}
+
+Table Categories {
+  _id ObjectId
+  name String
+  description String
+  // General, support
+}
