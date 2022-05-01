@@ -31,7 +31,7 @@ const ticketSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  proyect: {
+  project: {
     type: Schema.Types.ObjectId,
     ref: 'Project'
   },
